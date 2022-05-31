@@ -184,4 +184,6 @@ De acordo com o modelo de memória do **STM32F411**, precisamos definir o _Stack
 
 É preciso definir também a organização dos vetores de interrupção no inicio da memória **FLASH** do programa, para que seu uso com outros sistemas periféricos seja utilizado adequadamente. Para isso, o Manual de Referencia do STM32F411 fornece toda a tabela de vetores de interrupção para serem configurados, inicializamos ele no arquivo [startup.c](src/startup.c).
 
+É preciso garantir que o vetor de interrupções será armazenado no início da memória **FLASH**, essa etapa é feita na linkedição, e para isso, precisamos informar que seção o compilador irá posicinar no início da **FLASH** atribuindo o vetor a essa seção, chamamos de _.isr_vectors_.
+
 # LAB3

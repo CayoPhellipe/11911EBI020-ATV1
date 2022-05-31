@@ -5,7 +5,8 @@
 #define SRAM_END ((SRAM_START) + (SRAM_SIZE)) /* Final da SRAM STM32F411 */
 #define STACK_START SRAM_END                  /* Inicio da Stack */
 
-uint32_t vectors[] = {
+uint32_t vectors[] __attribute__((section(".isr_vectors"))) = {
+    // Definimos que este vetor deverá ser armazenado em uma nova seção chamada .isr_vectors
     STACK_START, /* 0x0000 0000 */
     0,           /* 0x0000 0004 */
     0,           /* 0x0000 0008 */
