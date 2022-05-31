@@ -148,15 +148,14 @@ O ultimo passo da aula era a instalção do VSCode, não executei esse passo, j�
 
 ## Objetivo da aula
 
-O objetivo desta aula era mostrar o processo de criação de todos os arquivos de
-partida e o processo de compilação para um sistema Cortex-M com o programa sendo desenvolvido do zero.
+O objetivo desta aula era mostrar o processo de criação de todos os arquivos de partida e o processo de compilação para um sistema Cortex-M com o programa sendo desenvolvido do zero.
 Neste laboratório foram abordados os seguintes temas:
 • automação do processo de compilação utilizando o utilitário make;
 • criação do arquivo startup.c para microcontroladores Cortex-M.
 
 ## Criação de um novo projeto
 
-Inicialmente foi criado um arquivo main que a priori não executaria nenhuma atividade, apenas ficaria em looping sem encerrar o programa.
+Inicialmente foi criado um arquivo [main.c](src/main.c) que a priori não executaria nenhuma atividade, apenas ficaria em looping sem encerrar o programa.
 
 ```
 #include <stdlib.h>
@@ -175,6 +174,12 @@ Para compilar este programa, foi ensinado que o compilador fornecido com o **GNU
 foo@bar$ arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb main.c -o main.o
 ```
 
-Para compilar todo o código, foi criado um arquivo [Makefile](src/Makefile) que ao longo da atividade foi sendo trabalhada modificações em seu conteúdo.
+Para compilar todo o código, foi criado um arquivo [Makefile](src/Makefile) que ao longo da atividade foi sendo trabalhada modificações em seu conteúdo para automatizar o processo de compilação dos arquivos.
+
+## Arquivo de inicialização
+
+Desenvolver aplicações para estruturas sem sistema operacional é preciso definir algumas etapas para controle de memória que serão executados antes da **main()**, para isso, foi criado o arquivo [startup.c](src/startup.c).
+
+De acordo com o modelo de memória do **STM32F411**, precisamos definir o _Stack Pointer_ (ou **SP**) na região final da memória **SRAM** para maximizar a memória **stack**, também é no modelo que descobrimos o início da **SRAM** em _0x20000000_.
 
 # LAB3
