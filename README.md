@@ -182,4 +182,6 @@ Desenvolver aplicações para estruturas sem sistema operacional é preciso defi
 
 De acordo com o modelo de memória do **STM32F411**, precisamos definir o _Stack Pointer_ (ou **SP**) na região final da memória **SRAM** para maximizar a memória **stack**, também é no modelo que descobrimos o início da **SRAM** em _0x20000000_.
 
+É preciso definir também a organização dos vetores de interrupção no inicio da memória **FLASH** do programa, para que seu uso com outros sistemas periféricos seja utilizado adequadamente. Para isso, o Manual de Referencia do STM32F411 fornece toda a tabela de vetores de interrupção para serem configurados, inicializamos ele no arquivo [startup.c](src/startup.c).
+
 # LAB3
