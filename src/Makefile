@@ -1,4 +1,10 @@
+CC = arm-none-eabi-gcc
+CFLAGS = -c -mcpu=cortex-m4 -mthumb
+
 all: main.o
 
 main.o: main.c
-arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb main.c -o main.o
+	$(CC) $(CFLAGS) main.c -o main.o
+
+clean:
+	rm -f *.o
