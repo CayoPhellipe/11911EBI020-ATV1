@@ -186,4 +186,6 @@ De acordo com o modelo de memória do **STM32F411**, precisamos definir o _Stack
 
 É preciso garantir que o vetor de interrupções será armazenado no início da memória **FLASH**, essa etapa é feita na linkedição, e para isso, precisamos informar que seção o compilador irá posicinar no início da **FLASH** atribuindo o vetor a essa seção, chamamos de _.isr_vectors_.
 
+Para funcionamento adequado do programa é nescessário uma rotina de _Reset Exception_, que será responsável por copiar a o conteúdo da seção _.data_ da memória **FLASH** para memória **SRAM** e inicializar a sessão _.bss_ em zero para garantir que as variáveis globais seguirão o padrão de inicialização com zero. Essa rotina foi chamada de _reset_handler()_.
+
 # LAB3
