@@ -3,3 +3,6 @@
 
 # Ignora o diretório ref (organiza os pdfs das aulas)
 ref/
+
+# Arquivos objetos de compilações
+src/*.o

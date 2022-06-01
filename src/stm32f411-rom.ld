@@ -1,0 +1,1 @@
+ENTRY(reset_handler)
