@@ -17,16 +17,26 @@ SECTIONS
         KEEP(*(.isr_vectors))
         *(.text)
         *(.rodata)
+        . = ALIGN(4)
+        _etext = .;
+        _la_data = _etext;
     }> FLASH
 
     /* Esta secao deve incluir a secao .data de todos arquivos objeto de entrada */
     .data :
     {
+        _sdata = .;
         *(.data)
+        . = ALIGN(4)
+        _edata = .;
     }> SRAM AT> FLASH
 
     /* Esta secao deve incluir a secao .bss de todos arquivos objeto de entrada */
     {
+        . = ALIGN(4);
+        _sbss = .;
         *(.bss)
+        . = ALIGN(4);
+        _ebss = .;
     }> SRAM
 }
