@@ -216,3 +216,5 @@ Com base no esquemático do **STM32F411** descobrimos que o _LED_ próprio do ch
 Para utilizar os periféricos é necessário habilitar o clock da porta, pois, o padrão é os periféricos estarem desligados após o reset. No caso da arquitetura **Cortex-M**, para atualizar o valor do bit em **GPIOCEN** identificamos o endereço do **RCC_AHB1ENR** na memória, utilizando o endereço base do módulo RCC e ajustamos com o offset dele. Então utilizamos o pino **PC13** em _push-pull_ que é o recomendado pelo esquemático e damos set/reset apenas no pino **PC13**.
 
 Para controlar o processo de linkedição é preciso um arquivo linker script, para isso foi montado o [stm32f411-rom.ld](src/stm32f411-rom.ld).
+
+Por fim, atualizamos o makefile para compilar utilizando o linker script e gerar uma imagem binária do arquivo _blinky.elf_ que pode ser gravado na memória flash do microcontrolador.
