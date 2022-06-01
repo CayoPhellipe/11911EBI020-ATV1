@@ -6,11 +6,14 @@ CP = arm-none-eabi-objcopy
 CFLAGS = -Wall -c -mcpu=cortex-m4 -mthumb -O0 
 LFLAGS = -nostdlib -T stm32f411-rom.ld #Flags do ls e linker script file
 
+OBJS = 	startup.o\
+		main.o\
 #Modificações para gera o blinky.elf e imagem binária para ser gravada no microcontrolador
+
 
 all: $(PROG).elf
 
-blink.elf: main.o startup.o
+$(PROG).elf: $(OBJS)
 	$(LD) $(LFLAGS) $^ -o $@
 	$(CP) $(PROG).elf -O binary $(PROG).bin
 
