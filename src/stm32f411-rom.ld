@@ -9,23 +9,25 @@ MEMORY
 
 SECTIONS
 {
-    /* Esta secao deve incluir a secao .text de todos arquivos objeto de entrada */
+    /* combinar todas as secoes .isr_vectors de todos arquivos de entrada */
+    /* combinar todas as secoes .text de todos arquivos de entrada */
+    /* combinar todas as secoes .rodata de todos arquivos de entrada */
     .text :
     {
-        /* combinar todas as secoes .isr_vectors de todos arquivos de entrada */
-        /* combinar todas as secoes .text de todos arquivos de entrada */
-        /* combinar todas as secoes .rodata de todos arquivos de entrada */
-    }>(vma) AT>(lma)
+        KEEP(*(.isr_vectors))
+        *(.text)
+        *(.rodata)
+    }> FLASH
 
     /* Esta secao deve incluir a secao .data de todos arquivos objeto de entrada */
     .data :
     {
-
-    }>(vma) AT>(lma)
+        *(.data)
+    }> SRAM AT> FLASH
 
     /* Esta secao deve incluir a secao .bss de todos arquivos objeto de entrada */
     .bss :
     {
-        
+
     }
 }
