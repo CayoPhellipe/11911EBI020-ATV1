@@ -26,8 +26,7 @@ SECTIONS
     }> SRAM AT> FLASH
 
     /* Esta secao deve incluir a secao .bss de todos arquivos objeto de entrada */
-    .bss :
     {
-
-    }
+        *(.bss)
+    }> SRAM
 }
