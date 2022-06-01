@@ -1,24 +1,22 @@
 PROG = blinky
 
 CC = arm-none-eabi-gcc
-LD = arm-none-eabi-gcc #Compilador do linker script
+LD = arm-none-eabi-gcc
 CP = arm-none-eabi-objcopy
-CFLAGS = -Wall -c -mcpu=cortex-m4 -mthumb -O0 
-LFLAGS = -nostdlib -T stm32f411-rom.ld #Flags do ls e linker script file
+CFLAGS = -c -mcpu=cortex-m4 -mthumb -Wall -O0
+LFLAGS = -nostdlib -T stm32f411-rom.ld
 
 OBJS = 	startup.o\
 		main.o\
-#Modificações para gera o blinky.elf e imagem binária para ser gravada no microcontrolador
-
 
 all: $(PROG).elf
 
 $(PROG).elf: $(OBJS)
-	$(LD) $(LFLAGS) $^ -o $@
-	$(CP) $(PROG).elf -O binary $(PROG).bin
+	$(LD) $(LFLAGS) $^ -o $@ $(CP) 
+	$(PROG).elf -O binary $(PROG).bin
 
 %.o: %.c
-	$(CC) $(CFLAGS) $< -o $@
+	$(CC) -c $(CFLAGS) $< -o $@
 
 clean:
-	rm -f *.o *.elf
+	rm -f $(OBJS) $(PROG).elf

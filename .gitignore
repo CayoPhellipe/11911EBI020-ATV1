@@ -6,3 +6,4 @@ ref/
 
 # Arquivos objetos de compilações
 src/*.o
+src/*.elf
