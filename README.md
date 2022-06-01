@@ -192,4 +192,6 @@ A rotina seguinte é a rotina de _NMI_, então foi criada a _`nmi_handler()`_ qu
 
 Ainda é nescessário definir muitas outras rotinas que não estamos preocupados em utilizar, então, definimos a rotina _`default_handler()`_ para no caso de interrupções não esperadas o programa travar em um looping, caso nescessário, podemos editar o [startup.c](src/startup.c) e configurar uma rotina para interrupção encontrada. Então o vetor de interrupções foi completamente preenchido, e os espaços onde ficaram marcados com zero são espaços reservados pelo sistema e servem para controle das dimensões do vetor de interrupções.
 
+Para evitar criar uma nova função para cada rotina de repetição e evitar ter que repetir o processo de edição e compilação do arquivo [startup.c](src/startup.c), foi adicionado o parâmetro _alias_ que definea função como apelido para função referenciada, e o parâmetro _weak_ define a função podendo ser substituída por qualquer outra função de mesmo nome e sem o parâmetro _weak_ que seja encontrada durante o processo de linkedição em qualquer arquivo _.c_.
+
 # LAB3
