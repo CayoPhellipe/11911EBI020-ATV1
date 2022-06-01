@@ -194,4 +194,6 @@ Ainda é nescessário definir muitas outras rotinas que não estamos preocupados
 
 Para evitar criar uma nova função para cada rotina de repetição e evitar ter que repetir o processo de edição e compilação do arquivo [startup.c](src/startup.c), foi adicionado o parâmetro _alias_ que definea função como apelido para função referenciada, e o parâmetro _weak_ define a função podendo ser substituída por qualquer outra função de mesmo nome e sem o parâmetro _weak_ que seja encontrada durante o processo de linkedição em qualquer arquivo _.c_.
 
+Por fim, definimos a função _`main()`_ no startup, para que a rotina _`reset_handler()`_ possa executa-la ao final, mesmo ela sendo implementada em outro arquivo. Foi definida as variaveis externas _`_sdata`_, _`_edata`_, _`_la_data`_, _`_sbss`_ e _`_ebss`_, varíaveis que serão passadas ao startup e definirão os endereços de início e fim das seções utilizadas pela rotina. A função _`reset_handler()`_ irá então copiar o conteúdo da seção _´.data´_ para memória **RAM** e preencher a _`.bss`_ totalmente com zero e executar a função _`main()`_.
+
 # LAB3
