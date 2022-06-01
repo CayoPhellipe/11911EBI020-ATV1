@@ -182,10 +182,14 @@ Desenvolver aplicações para estruturas sem sistema operacional é preciso defi
 
 De acordo com o modelo de memória do **STM32F411**, precisamos definir o _Stack Pointer_ (ou **SP**) na região final da memória **SRAM** para maximizar a memória **stack**, também é no modelo que descobrimos o início da **SRAM** em _0x20000000_.
 
-É preciso definir também a organização dos vetores de interrupção no inicio da memória **FLASH** do programa, para que seu uso com outros sistemas periféricos seja utilizado adequadamente. Para isso, o Manual de Referencia do STM32F411 fornece toda a tabela de vetores de interrupção para serem configurados, inicializamos ele no arquivo [startup.c](src/startup.c).
+É preciso definir também a organização dos vetores de interrupção no inicio da memória **FLASH** do programa, para que seu uso com outros sistemas periféricos seja utilizado adequadamente. Para isso, o Manual de Referencia do **STM32F411** fornece toda a tabela de vetores de interrupção para serem configurados, inicializamos ele no arquivo [startup.c](src/startup.c).
 
-É preciso garantir que o vetor de interrupções será armazenado no início da memória **FLASH**, essa etapa é feita na linkedição, e para isso, precisamos informar que seção o compilador irá posicinar no início da **FLASH** atribuindo o vetor a essa seção, chamamos de _.isr_vectors_.
+É preciso garantir que o vetor de interrupções será armazenado no início da memória **FLASH**, essa etapa é feita na linkedição, e para isso, precisamos informar que seção o compilador irá posicinar no início da **FLASH** atribuindo o vetor a essa seção, chamamos de _`.isr_vectors`_.
 
-Para funcionamento adequado do programa é nescessário uma rotina de _Reset Exception_, que será responsável por copiar a o conteúdo da seção _.data_ da memória **FLASH** para memória **SRAM** e inicializar a sessão _.bss_ em zero para garantir que as variáveis globais seguirão o padrão de inicialização com zero. Essa rotina foi chamada de _reset_handler()_.
+Para funcionamento adequado do programa é nescessário uma rotina de _Reset Exception_, que será responsável por copiar a o conteúdo da seção _`.data`_ da memória **FLASH** para memória **SRAM** e inicializar a sessão _`.bss`_ em zero para garantir que as variáveis globais seguirão o padrão de inicialização com zero. Essa rotina foi chamada de _reset_handler()_.
+
+A rotina seguinte é a rotina de _NMI_, então foi criada a _`nmi_handler()`_ que irá travar a execução em um looping, visto que não esperamos que seja executada esta interrupção, não iremos definir uma rotina no momento.
+
+Ainda é nescessário definir muitas outras rotinas que não estamos preocupados em utilizar, então, definimos a rotina _`default_handler()`_ para no caso de interrupções não esperadas o programa travar em um looping, caso nescessário, podemos editar o [startup.c](src/startup.c) e configurar uma rotina para interrupção encontrada. Então o vetor de interrupções foi completamente preenchido, e os espaços onde ficaram marcados com zero são espaços reservados pelo sistema e servem para controle das dimensões do vetor de interrupções.
 
 # LAB3
