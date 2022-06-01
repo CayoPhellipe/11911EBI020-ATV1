@@ -1,5 +1,5 @@
-# Ignore vscode configs
+# Ignora configurações do usuário no vscode
 .vscode/
 
-# Ignore ref directory
+# Ignora o diretório ref (organiza os pdfs das aulas)
 ref/

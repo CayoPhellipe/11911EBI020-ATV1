@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdint.h>
 
 /* AHB1 Base Addresses ******************************************************/
 #define STM32_RCC_BASE 0x40023800 /* 0x40023800-0x40023bff: Reset   \
@@ -52,6 +53,9 @@ and Clock control RCC */
 #define GPIO_BSRR_SET(n) (1 << (n))
 #define GPIO_BSRR_RST(n) (1 << (n + 16))
 
+// LED DELAY
+#define LED_DELAY 5000
+
 int main(int argc, char *argv[])
 {
     uint32_t reg;
@@ -88,10 +92,10 @@ int main(int argc, char *argv[])
     {
         *pGPIOC_BSRR = GPIO_BSRR_SET(13);
         for (uint32_t i = 0; i < LED_DELAY; i++)
-            void;
+            ;
         *pGPIOC_BSRR = GPIO_BSRR_RST(13);
         for (uint32_t i = 0; i < LED_DELAY; i++)
-            void;
+            ;
     };
 
     /* Nao deveria chegar aqui */

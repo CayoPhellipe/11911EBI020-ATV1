@@ -1,5 +1,5 @@
 CC = arm-none-eabi-gcc
-CFLAGS = -c -mcpu=cortex-m4 -mthumb -O0 
+CFLAGS = -Wall -c -mcpu=cortex-m4 -mthumb -O0 
 
 all: startup.o main.o
 
