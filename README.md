@@ -197,3 +197,20 @@ Para evitar criar uma nova função para cada rotina de repetição e evitar ter
 Por fim, definimos a função _`main()`_ no startup, para que a rotina _`reset_handler()`_ possa executa-la ao final, mesmo ela sendo implementada em outro arquivo. Foi definida as variaveis externas _`_sdata`_, _`_edata`_, _`_la_data`_, _`_sbss`_ e _`_ebss`_, varíaveis que serão passadas ao startup e definirão os endereços de início e fim das seções utilizadas pela rotina. A função _`reset_handler()`_ irá então copiar o conteúdo da seção _´.data´_ para memória **RAM** e preencher a _`.bss`_ totalmente com zero e executar a função _`main()`_.
 
 # LAB3
+
+## Objetivos
+
+Neste laboratório implementação do programa para piscar o LED integrado ao kit de desenvolvimento **STM32F411 Blackpill**. Na aula anterior criamos os arquivos **main.c**, que a priori não faz nada, o arquivo **startup.c**, onde implementamos parcialmente os vetores de interrupção, a rotina de tratamento do reset com a inicialização de variáveis e o arquivo **Makefile** onde escrevemos as regras para automatizar o processo de compilação.
+
+No laboratório de hoje iremos abordar os seguintes temas:
+
+- escrever o programa para piscar o LED;
+- analizar arquivos objeto realocáveis;
+- escrever o arquivo **linker script**;
+- gerar e analizar o **map file**.
+
+## Desenvolvendo um programa para piscar um LED
+
+Com base no esquemático do **STM32F411** descobrimos que o _LED_ próprio do chip está conectado no pino C13, e que para ligar-lo, este pino precisa ser configurado em nível lógico baixo.
+
+Para utilizar os periféricos é necessário habilitar o clock da porta, pois, o padrão é os periféricos estarem desligados após o reset. No caso da arquitetura **Cortex-M**, para atualizar o valor do bit em **GPIOCEN** identificamos o endereço do **RCC_AHB1ENR** na memória, utilizando o endereço base do módulo RCC e ajustamos com o offset dele.
