@@ -55,11 +55,10 @@
 #define GPIO_BSRR_RST(n) (1 << (n + 16))
 
 // LED DELAY
-#define LED_DELAY 500000
+#define LED_DELAY 90000
 
 // .bss & .data tests
 static uint32_t led_status;
-static const char fw_version[] = {'V', '1', '.', '0'};
 
 int main(int argc, char *argv[])
 {
@@ -97,12 +96,10 @@ int main(int argc, char *argv[])
     {
         *pGPIOC_BSRR = GPIO_BSRR_SET(13);
         led_status = 0;
-        for (uint32_t i = 0; i < LED_DELAY; i++)
-            ;
+        for (uint32_t i = 0; i < LED_DELAY; i++);
         *pGPIOC_BSRR = GPIO_BSRR_RST(13);
         led_status = 1;
-        for (uint32_t i = 0; i < LED_DELAY; i++)
-            ;
+        for (uint32_t i = 0; i < LED_DELAY; i++);
     }
 
     return EXIT_SUCCESS;
