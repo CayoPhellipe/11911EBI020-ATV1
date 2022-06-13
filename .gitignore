@@ -1,9 +1,14 @@
-# Ignora configurações do usuário no vscode
-.vscode/
-
 # Ignora o diretório ref (organiza os pdfs das aulas)
 ref/
 
-# Arquivos objetos de compilações
+# VSCode configs 
+.vscode
+
+# Object Files
 src/*.o
+
+# Binary files
+src/*.bin
+
+# Executable and Linkable File 
 src/*.elf
